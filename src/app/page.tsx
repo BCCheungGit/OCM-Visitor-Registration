@@ -1,37 +1,47 @@
-import Link from "next/link";
+"use client";
+
+import { SignedIn, SignedOut, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { Button } from "~/components/ui/button";
+
+
+
+function GetInfoPage() {
+  const { isLoaded, isSignedIn, user } = useUser();
+  if (!user) return null;
+  return (
+    <div className="h-full text-lg text-center flex flex-col gap-4">
+      <div>
+        Welcome, <span>{user.fullName}</span>
+      </div>
+      <div>
+        Email: <span>{user.emailAddresses[0]?.emailAddress}</span>
+      </div>
+      <div>
+        Phone: <span>{user.phoneNumbers[0]?.phoneNumber}</span>
+      </div>
+      <div>
+        <Button>Take a Picture!</Button>
+      </div>
+
+      
+    </div>
+  )
+}
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+    <main className="flex flex-col min-h-screen items-center mt-20">
+      <SignedOut>
+        <div className="h-full text-lg justify-center items-center text-center flex flex-col gap-4">
+          <div>
+            Welcome to OCM! Click the button below to register.
+          </div>
+        <SignInButton><Button className="w-fit">Register</Button></SignInButton>
         </div>
-      </div>
+      </SignedOut>
+      <SignedIn>
+        <GetInfoPage />
+      </SignedIn>
     </main>
   );
 }

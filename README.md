@@ -5,7 +5,7 @@ This is a simple web application that allows visitors to check in to the OCM chu
 computer at the entrance of the building. 
 
 ## TODO:
-- [ ] Add authentication with Clerk (Email and Phone Number support)
+- [x] Add authentication with Clerk (Email and Phone Number support)
 - [ ] Add camera support to take a picture of the visitor
 - [ ] Connect to OCM database to store visitor information (PostgreSQL), Drizzle ORM
 - [ ] Add a dashboard to view all visitors and visitor information

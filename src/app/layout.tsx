@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { ClerkProvider } from "@clerk/nextjs";
+import { TopNav } from "./_components/topnav";
 
 export const metadata = {
   title: "OCM Visitors",
@@ -18,7 +19,10 @@ export default function RootLayout({
 
     <ClerkProvider>
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>{children}</body>
+      <body className="dark font-sans">
+        <TopNav />
+        {children}
+      </body>
     </html>
     </ClerkProvider>
   );
