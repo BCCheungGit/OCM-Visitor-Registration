@@ -3,6 +3,8 @@
 import { SignedIn, SignedOut, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "~/components/ui/button";
 
+import { useRef, useState } from "react";
+
 
 
 function GetInfoPage() {
