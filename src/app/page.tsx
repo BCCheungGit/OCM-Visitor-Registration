@@ -1,13 +1,36 @@
 "use client";
 
+
 import { SignedIn, SignedOut, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+
+import { useCallback, useRef, useState } from "react";
+import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
 
-import { useRef, useState } from "react";
 
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+  facingMode: "user",
+
+};
 
 
 function GetInfoPage() {
+
+  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
+  const webcamRef = useRef<Webcam>(null);
+  const [url, setUrl] = useState<string | null>(null);
+  const capture = useCallback(() => {
+    const imageSrc = webcamRef.current?.getScreenshot();
+    if (imageSrc) {
+      setUrl(imageSrc);
+      console.log(imageSrc);
+    }
+  }, [webcamRef, setUrl])
+
+
+
   const { isLoaded, isSignedIn, user } = useUser();
   if (!user) return null;
   return (
@@ -22,9 +45,30 @@ function GetInfoPage() {
         Phone: <span>{user.phoneNumbers[0]?.phoneNumber}</span>
       </div>
       <div>
-        <Button>Take a Picture!</Button>
+        <Button onClick={() => {
+          setCaptureEnable(true);
+        }}>Take a Picture!</Button>
       </div>
-
+      
+        {isCaptureEnable && (
+          <>
+            <Webcam
+              audio={false}
+              width={540}
+              height={360}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+            />  
+            <div className="flex flex-row justify-center gap-4">
+            <Button onClick={capture}>Capture photo</Button>
+            <Button onClick={()=>{
+              setCaptureEnable(false);
+              setUrl(null);
+            }}>Cancel</Button>
+            </div>
+          </>
+        )}
       
     </div>
   )
