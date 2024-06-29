@@ -29,7 +29,7 @@ function GetInfoPage() {
     const imageSrc = webcamRef.current?.getScreenshot();
     if (imageSrc) {
       setUrl(imageSrc);
-      console.log(imageSrc);
+      setCaptureEnable(false);
     }
   }, [webcamRef, setUrl])
 
@@ -71,7 +71,25 @@ function GetInfoPage() {
             </div>
           </>
         )}
-      
+        {url && (
+        <>
+          <div>
+            <img src={url} alt="Screenshot" />
+          </div>
+          <div className="flex flex-row justify-center gap-4">
+          <Button
+              onClick={() => {
+                setUrl(null);
+              }}
+            >
+              Delete
+            </Button>
+          <Button>
+            Confirm Upload
+          </Button>
+            </div>
+        </>
+      )}
     </div>
   )
 }
