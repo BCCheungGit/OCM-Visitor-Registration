@@ -38,60 +38,71 @@ function GetInfoPage() {
   const { isLoaded, isSignedIn, user } = useUser();
   if (!user) return null;
   return (
-    <div className="h-full text-lg text-center flex flex-col gap-4">
+    <div className="flex h-full flex-col gap-4 text-center text-lg">
       <div>
         Welcome, <span>{user.fullName}</span>
       </div>
+      {user.emailAddresses[0]?.emailAddress && (
+        <div>
+          Email: <span>{user.emailAddresses[0]?.emailAddress}</span>
+        </div>
+      )}
+      {user.phoneNumbers[0]?.phoneNumber && (
+        <div>
+          Phone: <span>{user.phoneNumbers[0]?.phoneNumber}</span>
+        </div>
+      )}
+
       <div>
-        Email: <span>{user.emailAddresses[0]?.emailAddress}</span>
+        <Button
+          onClick={() => {
+            setCaptureEnable(true);
+          }}
+        >
+          Take a Picture!
+        </Button>
       </div>
-      <div>
-        Phone: <span>{user.phoneNumbers[0]?.phoneNumber}</span>
-      </div>
-      <div>
-        <Button onClick={() => {
-          setCaptureEnable(true);
-        }}>Take a Picture!</Button>
-      </div>
-      
-        {isCaptureEnable && (
-          <>
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              videoConstraints={videoConstraints}
-            />  
-            <div className="flex flex-row justify-center gap-4">
+
+      {isCaptureEnable && (
+        <>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
+          />
+          <div className="flex flex-row justify-center gap-4">
             <Button onClick={capture}>Capture photo</Button>
-            <Button onClick={()=>{
-              setCaptureEnable(false);
-              setUrl(null);
-            }}>Cancel</Button>
-            </div>
-          </>
-        )}
-        {url && (
+            <Button
+              onClick={() => {
+                setCaptureEnable(false);
+                setUrl(null);
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </>
+      )}
+      {url && (
         <>
           <div>
             <img src={url} alt="Screenshot" />
           </div>
           <div className="flex flex-row justify-center gap-4">
-          <Button
+            <Button
               onClick={() => {
                 setUrl(null);
               }}
             >
               Delete
             </Button>
-          <Button>
-            Confirm Upload
-          </Button>
-            </div>
+            <Button>Confirm Upload</Button>
+          </div>
         </>
       )}
     </div>
-  )
+  );
 }
 
 export default function HomePage() {
