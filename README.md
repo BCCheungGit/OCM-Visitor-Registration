@@ -6,7 +6,8 @@ computer at the entrance of the building.
 
 ## TODO:
 - [x] Add authentication with Clerk (Email and Phone Number support)
-- [ ] Add camera support to take a picture of the visitor
+- [x] Add camera support to take a picture of the visitor
+- [ ] Upload the photos to uploadthing temporarily
 - [ ] Connect to OCM database to store visitor information (PostgreSQL), Drizzle ORM
 - [ ] Add a dashboard to view all visitors and visitor information
 - [ ] Add a feature to print a visitor badge 

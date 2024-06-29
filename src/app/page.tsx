@@ -8,16 +8,20 @@ import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
 
 
-const videoConstraints = {
-  width: 1280,
-  height: 720,
-  facingMode: "user",
-
-};
 
 
 function GetInfoPage() {
+    
 
+
+  const isMobile = window.innerWidth < 768;
+  const width = isMobile ? window.innerWidth : 800;
+  const height = isMobile ? 250 : 400;
+  const videoConstraints = {
+    width,
+    height,
+    facingMode: "user",
+  };
   const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
   const [url, setUrl] = useState<string | null>(null);
@@ -54,8 +58,6 @@ function GetInfoPage() {
           <>
             <Webcam
               audio={false}
-              width={540}
-              height={360}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
