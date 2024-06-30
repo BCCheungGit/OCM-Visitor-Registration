@@ -18,7 +18,7 @@ export async function addVisitor(
     if (!user) {
         throw new Error("Unauthorized");
     }
-    const result = await db.insert(visitors).values({
+    await db.insert(visitors).values({
         firstName: firstName,
         lastName: lastName,
         phoneNumber: phoneNumber,
