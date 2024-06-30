@@ -29,6 +29,7 @@ function GetInfoPage() {
     const imageSrc = webcamRef.current?.getScreenshot();
     if (imageSrc) {
       setUrl(imageSrc);
+      console.log(imageSrc);
       setCaptureEnable(false);
     }
   }, [webcamRef, setUrl])
@@ -98,7 +99,6 @@ function GetInfoPage() {
               Delete
             </Button>
             <Button>
-              <UploadButton endpoint="imageUploader" />  
               Confirm Upload
             </Button>
           </div>
