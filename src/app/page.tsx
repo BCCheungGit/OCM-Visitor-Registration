@@ -7,7 +7,9 @@ import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
 import { UploadButton } from "~/utils/uploadthing";
-
+import { addVisitor } from "~/server/queries";
+import { db } from "~/server/db";
+import { visitors } from "~/server/db/schema";
 
 
 function GetInfoPage() {
@@ -99,7 +101,19 @@ function GetInfoPage() {
             >
               Delete
             </Button>
-            <Button>
+            <Button onClick={async () => {
+                await addVisitor(
+                  user.firstName || "",
+                  user.lastName || "",
+                  user.phoneNumbers[0]?.phoneNumber || "",
+                  user.emailAddresses[0]?.emailAddress || "",
+                  url
+                ).then(() => {
+                  setUrl(null);
+                  alert("Upload successful!");
+                })
+                
+            }}>
               Confirm Upload
             </Button>
           </div>

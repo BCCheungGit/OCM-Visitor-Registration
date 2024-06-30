@@ -18,17 +18,21 @@ import {
  */
 export const createTable = pgTableCreator((name) => `ocm-visitors_${name}`);
 
-export const posts = createTable(
-  "post",
+export const visitors = createTable(
+  "visitors",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    firstName: varchar("first_name", { length: 256 }).notNull(),
+    lastName: varchar("last_name", { length: 256 }).notNull(),
+    phoneNumber: varchar("phone_number", { length: 256 }).notNull(),
+    email: varchar("email", { length: 256 }),
+    image: varchar("image", { length: 1000000 }).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt", { withTimezone: true }),
   },
   (example) => ({
-    nameIndex: index("name_idx").on(example.name),
+    nameIndex: index("name_idx").on(example.firstName, example.lastName),
   })
 );
