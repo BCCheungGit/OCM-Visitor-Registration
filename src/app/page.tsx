@@ -30,6 +30,7 @@ function GetInfoPage() {
     if (imageSrc) {
       setUrl(imageSrc);
       setCaptureEnable(false);
+      console.log(imageSrc);
     }
   }, [webcamRef, setUrl])
 
