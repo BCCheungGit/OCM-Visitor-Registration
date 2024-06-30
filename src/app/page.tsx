@@ -6,7 +6,7 @@ import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, useUser
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
-
+import { UploadButton } from "~/utils/uploadthing";
 
 
 
@@ -97,7 +97,10 @@ function GetInfoPage() {
             >
               Delete
             </Button>
-            <Button>Confirm Upload</Button>
+            <Button>
+              <UploadButton endpoint="imageUploader" />  
+              Confirm Upload
+            </Button>
           </div>
         </>
       )}
