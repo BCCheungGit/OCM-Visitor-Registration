@@ -36,7 +36,7 @@ function GetInfoPage() {
 
 
 
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { user } = useUser();
   if (!user) return null;
   return (
     <div className="flex h-full flex-col gap-4 text-center text-lg">
@@ -105,10 +105,9 @@ function GetInfoPage() {
                   user.phoneNumbers[0]?.phoneNumber ?? "",
                   user.emailAddresses[0]?.emailAddress ?? "",
                   url
-                ).then(() => {
-                  setUrl(null);
-                  alert("Upload successful!");
-                })
+                )
+                setUrl(null);
+                alert("Uploaded successfully!");
                 
             }}>
               Confirm Upload
