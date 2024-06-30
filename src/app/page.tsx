@@ -1,12 +1,12 @@
 "use client";
 
 
-import { SignedIn, SignedOut, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, useUser } from "@clerk/nextjs";
 
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
-
+import { UploadButton } from "~/utils/uploadthing";
 
 
 
@@ -98,7 +98,10 @@ function GetInfoPage() {
             >
               Delete
             </Button>
-            <Button>Confirm Upload</Button>
+            <Button>
+              <UploadButton endpoint="imageUploader" />  
+              Confirm Upload
+            </Button>
           </div>
         </>
       )}
@@ -114,7 +117,7 @@ export default function HomePage() {
           <div>
             Welcome to OCM! Click the button below to register.
           </div>
-        <SignInButton><Button className="w-fit">Register</Button></SignInButton>
+        <SignUpButton><Button className="w-fit">Register</Button></SignUpButton>
         </div>
       </SignedOut>
       <SignedIn>

@@ -17,6 +17,7 @@
     "@clerk/nextjs": "^5.1.6",
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-nextjs": "^0.10.1",
+    "@uploadthing/react": "^6.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.30.10",
@@ -29,6 +30,7 @@
     "react-webcam": "^7.2.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^6.13.2",
     "zod": "^3.23.3"
   },
   "devDependencies": {
