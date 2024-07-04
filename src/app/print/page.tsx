@@ -22,7 +22,7 @@ export default function PrintPage() {
   const { user } = useUser();
 
   if (!user) {
-    return null;
+    return <div>Unauthorized</div>;
   }
 
   const [visitor, setVisitor] = useState<Visitor[]>([]);
