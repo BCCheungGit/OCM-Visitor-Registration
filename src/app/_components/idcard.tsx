@@ -24,7 +24,7 @@ export const IDCard: React.FC<IDCardProps> = ({ name, phone, email, photo }) => 
         <CardHeader>
         <div className="flex items-center space-x-4 rounded-md">
             <Image
-                src={photo && photo || ""}
+                src={photo ?? ""}
                 alt="Visitor Photo"
                 width={113}
                 height={150}

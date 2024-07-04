@@ -25,7 +25,6 @@ export default function PrintPage() {
     return null;
   }
 
-
   const [visitor, setVisitor] = useState<Visitor[]>([]);
 
   useEffect(() => {
