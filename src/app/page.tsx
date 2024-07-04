@@ -12,9 +12,8 @@ import { addVisitor } from "~/server/queries";
 function GetInfoPage() {
     
 
-
   const isMobile = window.innerWidth < 768;
-  const width = isMobile ? window.innerWidth : 800;
+  const width = isMobile ? window.innerWidth : 300;
   const height = isMobile ? 250 : 400;
   const videoConstraints = {
     width,
@@ -71,6 +70,7 @@ function GetInfoPage() {
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             videoConstraints={videoConstraints}
+            mirrored={true}
           />
           <div className="flex flex-row justify-center gap-4">
             <Button onClick={capture}>Capture photo</Button>
@@ -104,7 +104,8 @@ function GetInfoPage() {
                   user.lastName ?? "",
                   user.phoneNumbers[0]?.phoneNumber ?? "",
                   user.emailAddresses[0]?.emailAddress ?? "",
-                  url
+                  url,
+                  user.id
                 )
                 setUrl(null);
                 alert("Uploaded successfully!");
