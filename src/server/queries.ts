@@ -50,7 +50,6 @@ export async function getVisitor(id: string) {
         const visitor = await db.query.visitors.findFirst({
             where: (model, { eq }) => eq(model.userId, id)
         })
-        console.log("Visitor data:", visitor);
         return {
             name: visitor?.firstName ?? '',
             phone: visitor?.phoneNumber ?? '',
