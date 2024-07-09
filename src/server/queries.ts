@@ -51,7 +51,7 @@ export async function getVisitor(id: string) {
             where: (model, { eq }) => eq(model.userId, id)
         })
         return {
-            name: visitor?.firstName ?? '',
+            name: visitor?.firstName + " " + visitor?.lastName ?? '',
             phone: visitor?.phoneNumber ?? '',
             email: visitor?.email ?? '',
             photo: visitor?.image ?? ''
