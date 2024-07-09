@@ -20,15 +20,15 @@ interface Visitor {
 
 export default function PrintPage() {
   const { user } = useUser();
+  const [visitor, setVisitor] = useState<Visitor[]>([]);
 
   if (!user) {
     return <div>Unauthorized</div>;
   }
 
-  const [visitor, setVisitor] = useState<Visitor[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
+
+  const fetchData = async () => {
       try {
         const visitors = await getVisitor(user.id);
         setVisitor(visitors);
@@ -37,8 +37,7 @@ export default function PrintPage() {
       }
     };
 
-    fetchData();
-  }, [user.id]);
+  fetchData();
 
   if (!visitor.length) {
     return <div>Loading visitor data...</div>;
