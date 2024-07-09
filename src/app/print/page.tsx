@@ -15,7 +15,7 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
         photo: string | undefined;
     }>({
         name: undefined,
-        phone: undefined,
+        phone: undefined, 
         email: undefined,
         photo: undefined
     });
@@ -55,6 +55,7 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
         </div>
     );
 };
+
 
 export default function PrintPage() {
     const { isSignedIn, user } = useUser();

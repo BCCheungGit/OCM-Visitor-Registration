@@ -2,43 +2,85 @@
 
 
 import { SignedIn, SignedOut, SignUpButton, useUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { Router } from "next/router";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
-import { addVisitor } from "~/server/queries";
+import { addVisitor, getVisitor } from "~/server/queries";
+import PrintPage from "./print/page";
 
 
-function GetInfoPage() {
+const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
+  const [visitorData, setVisitorData] = useState<{
+    name: string | undefined;
+    phone: string | undefined;
+    email?: string;
+    photo: string | undefined;
+}>({
+    name: undefined,
+    phone: undefined, 
+    email: undefined,
+    photo: undefined
+});
+
     
 
-  const isMobile = window.innerWidth < 768;
-  const width = isMobile ? window.innerWidth : 300;
-  const height = isMobile ? 250 : 400;
-  const videoConstraints = {
-    width,
-    height,
-    facingMode: "user",
-  };
-  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
-  const webcamRef = useRef<Webcam>(null);
-  const [url, setUrl] = useState<string | null>(null);
-  const capture = useCallback(() => {
-    const imageSrc = webcamRef.current?.getScreenshot();
-    if (imageSrc) {
-      setUrl(imageSrc);
-      console.log(imageSrc);
-      setCaptureEnable(false);
-      console.log(imageSrc);
-    }
-  }, [webcamRef, setUrl])
+const isMobile = window.innerWidth < 768;
+const width = isMobile ? window.innerWidth : 300;
+const height = isMobile ? 250 : 400;
+const videoConstraints = {
+  width,
+  height,
+  facingMode: "user",
+};
+const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
+const webcamRef = useRef<Webcam>(null);
+const [url, setUrl] = useState<string | null>(null);
+const capture = useCallback(() => {
+  const imageSrc = webcamRef.current?.getScreenshot();
+  if (imageSrc) {
+    setUrl(imageSrc);
+    console.log(imageSrc);
+    setCaptureEnable(false);
+    console.log(imageSrc);
+  }
+}, [webcamRef, setUrl])
 
 
 
-  const { user } = useUser();
-  if (!user) return null;
-  return (
+const { user } = useUser();
+if (!user) return null;
+
+
+
+
+
+useEffect(() => {
+  async function fetchVisitor() {
+      try {
+          await getVisitor(id)
+          .then((visitor) => {
+            setVisitorData({
+              name: visitor.name,
+              phone: visitor.phone,
+              email: visitor.email ?? undefined,
+              photo: visitor.photo ?? undefined
+            });
+          })
+          .catch((error) => console.error("Error fetching visitor:", error));
+      } catch (error) {
+          console.error("Error fetching visitor:", error);
+      }
+  }
+
+  fetchVisitor();
+  }, [id]);
+
+  if (!visitorData.photo) return (
     <div className="flex h-full flex-col gap-4 text-center text-lg">
+      
       <div>
         Welcome, <span>{user.fullName}</span>
       </div>
@@ -118,7 +160,26 @@ function GetInfoPage() {
       )}
     </div>
   );
+  else {
+    return (
+      <PrintPage/>
+    )
+  }
+  
+};
+
+
+function GetInfoPage() {
+  const { user } = useUser();
+  if (!user) return null;
+  return (
+    <>
+    <VisitorComponent id={user.id} />
+    </>
+  );
 }
+
+
 
 export default function HomePage() {
   return (
