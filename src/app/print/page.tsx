@@ -22,18 +22,17 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
 
     useEffect(() => {
         async function fetchVisitor() {
-          const visitor = await getVisitor(id)
-          setVisitorData({
-              name: visitor.name,
-              phone: visitor.phone,
-              email: visitor.email ?? undefined,
-              photo: visitor.photo
-          });   
-        //     try {
-
-        //     } catch (error) {
-        //         console.error("Error fetching visitor:", error);
-        //         }
+            try {
+                const visitor = await getVisitor(id)
+                setVisitorData({
+                    name: visitor.name,
+                    phone: visitor.phone,
+                    email: visitor.email ?? undefined,
+                    photo: visitor.photo
+                });   
+            } catch (error) {
+                console.error("Error fetching visitor:", error);
+                }
         }
 
         fetchVisitor();
