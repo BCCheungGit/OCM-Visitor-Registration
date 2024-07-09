@@ -29,7 +29,7 @@ export const IDCard: React.FC<IDCardProps> = ({ name, phone, email, photo }) => 
                 width={113}
                 height={150}
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
                 <CardTitle>{name}</CardTitle>
                 <CardDescription>{phone}</CardDescription>
                 {email && <CardDescription>{email}</CardDescription>}
