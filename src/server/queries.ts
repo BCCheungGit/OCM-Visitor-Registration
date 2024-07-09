@@ -46,17 +46,22 @@ export async function getVisitor(id: string) {
     if (!user) {
         throw new Error("Unauthorized");
     }
-
-    const visitor = await db.query.visitors.findFirst({
-        where: (model, { eq}) => eq(model.userId, id)
-    })
-
-    console.log("Visitor data:", visitor);
-    return {
-        name: visitor?.firstName ?? '',
-        phone: visitor?.phoneNumber ?? '',
-        email: visitor?.email ?? '',
-        photo: visitor?.image ?? ''
+    try {
+        const visitor = await db.query.visitors.findFirst({
+            where: (model, { eq }) => eq(model.userId, id)
+        })
+        console.log("Visitor data:", visitor);
+        return {
+            name: visitor?.firstName ?? '',
+            phone: visitor?.phoneNumber ?? '',
+            email: visitor?.email ?? '',
+            photo: visitor?.image ?? ''
+        }
+    } catch (error) {
+        throw new Error("Error fetching visitor data");
     }
+
+
+
 
 }
