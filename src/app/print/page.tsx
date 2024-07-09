@@ -37,7 +37,13 @@ export default function PrintPage() {
       }
     };
 
-  fetchData();
+    fetchData()
+    .then(() => {
+      console.log("Fetch operation completed successfully.");
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
 
   if (!visitor.length) {
     return <div>Loading visitor data...</div>;
