@@ -57,9 +57,9 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
 };
 
 export default function PrintPage() {
-    const { user } = useUser();
+    const { isSignedIn, user } = useUser();
 
-    if (!user) {
+    if (!isSignedIn || !user) {
         return <div>Unauthorized</div>;
     }
 

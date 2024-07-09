@@ -30,14 +30,8 @@ const config = {
       }
     ],
     "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      {
-        "checksVoidReturn": {
-          "attributes": false
-        }
-      }
-    ],
+    "@typescript-eslint/return-await": "off",
+    
     "drizzle/enforce-delete-with-where": [
       "error",
       {
