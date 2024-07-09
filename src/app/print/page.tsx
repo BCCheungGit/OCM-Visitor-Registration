@@ -1,13 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { IDCard } from "../_components/idcard";
 import { useUser } from "@clerk/nextjs";
 import { getVisitor } from "~/server/queries";
+import ReactToPrint from 'react-to-print';
 
+interface VisitorComponentProps {
+    id: string;
+    idCardContainerRef: React.RefObject<HTMLDivElement>; 
+}
 
-const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
+const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainerRef }) => {
     const [visitorData, setVisitorData] = useState<{
         name: string | undefined;
         phone: string | undefined;
@@ -43,7 +48,7 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
     }, [id]);
 
     return (
-        <div>
+        <div ref={idCardContainerRef}>
             {visitorData.name && (
                 <IDCard
                     name={visitorData.name}
@@ -60,14 +65,19 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
 export default function PrintPage() {
     const { isSignedIn, user } = useUser();
 
+    const idCardRef = useRef<HTMLDivElement>(null);
+
     if (!isSignedIn || !user) {
         return <div>Unauthorized</div>;
     }
 
     return (
         <div className="flex h-full flex-col gap-4 min-h-screen items-center text-center text-lg mt-20">
-            <Button>Click Here to Print ID Card</Button>
-            <VisitorComponent id={user.id} />
+            <ReactToPrint 
+                trigger={() => <Button>Print ID Card</Button>}
+                content={() => idCardRef.current}
+            />
+            <VisitorComponent id={user.id} idCardContainerRef={idCardRef} />
         </div>
     );
 }

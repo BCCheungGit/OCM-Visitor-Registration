@@ -19,6 +19,6 @@ computer at the entrance of the building.
 - [x] Connect to OCM database to store visitor information (PostgreSQL), Drizzle ORM
 - [x] Get visitor information from the database
 - [x] Generate a temporary ID Card for users
-- [ ] Update the styling for the application
-- [ ] Add a feature to print a visitor badge 
+- [x] Update the styling for the application
+- [x] Add a feature to print a visitor badge 
 - [ ] Add a dashboard to view all visitors and visitor information
