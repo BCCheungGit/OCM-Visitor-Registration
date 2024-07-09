@@ -23,13 +23,15 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
     useEffect(() => {
         async function fetchVisitor() {
             try {
-                const visitor = await getVisitor(id);
+                const visitor = await getVisitor(id)
+                // tslint:disable-next-line:no-unsafe-any
                 setVisitorData({
                     name: visitor.name,
                     phone: visitor.phone,
                     email: visitor.email ?? undefined,
                     photo: visitor.photo
                 });
+                
             } catch (error) {
                 console.error("Error fetching visitor:", error);
                 // Handle error fetching visitor data
