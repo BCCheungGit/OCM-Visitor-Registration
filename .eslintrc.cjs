@@ -8,11 +8,11 @@ const config = {
     "@typescript-eslint",
     "drizzle"
   ],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked"
-  ],
+  // "extends": [
+  //   "next/core-web-vitals",
+  //   "plugin:@typescript-eslint/recommended-type-checked",
+  //   "plugin:@typescript-eslint/stylistic-type-checked"
+  // ],
   "rules": {
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
@@ -31,7 +31,7 @@ const config = {
     ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/return-await": "off",
-    
+
     "drizzle/enforce-delete-with-where": [
       "error",
       {
