@@ -18,17 +18,20 @@ interface Visitor {
   updatedAt: Date | null;
 }
 
+
+
+
+
 export default function PrintPage() {
   const { user } = useUser();
-  const [visitor, setVisitor] = useState<Visitor[]>([]);
 
   if (!user) {
     return <div>Unauthorized</div>;
   }
 
-
-
-  const fetchData = async () => {
+  const [visitor, setVisitor] = useState<Visitor[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
       try {
         const visitors = await getVisitor(user.id);
         setVisitor(visitors);
@@ -37,13 +40,8 @@ export default function PrintPage() {
       }
     };
 
-    fetchData()
-    .then(() => {
-      console.log("Fetch operation completed successfully.");
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
+    fetchData();
+  }, [user.id]);
 
   if (!visitor.length) {
     return <div>Loading visitor data...</div>;
