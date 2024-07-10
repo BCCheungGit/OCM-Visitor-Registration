@@ -15,8 +15,8 @@ export const IDCard: React.FC<IDCardProps> = ({ name, phone, email, photo, date 
     return (
     <div className="sm:w-[400px] sm:h-[280px] sm:p-[20px] p-[10px] leading-[35px] rounded-xl border-1 sm:border-t-[15px] sm:border-b-[15px] border-t-[10px] border-b-[10px] w-[300px] h-[200px] shadow-md">
         <table className="min-w-full">
-            <td className="flex flex-col gap-4 justify-center">
-                <tr className="flex flex-row min-w-full gap-7 justify-center items-center">
+            <td className="flex flex-col sm:gap-4 gap-2 justify-center">
+                <tr className="flex flex-row min-w-full justify-center items-center">
                     <th className="sm:text-xl text-sm">VISITOR 訪客</th>
                 </tr>
                 <tr className="grid grid-cols-3 min-w-full gap-2">
