@@ -19,7 +19,7 @@ export default function RootLayout({
 
     <ClerkProvider>
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="font-sans overflow-hidden">
+      <body className="font-sans">
         <TopNav />
         {children}
       </body>

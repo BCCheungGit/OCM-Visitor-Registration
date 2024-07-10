@@ -54,7 +54,8 @@ export async function getVisitor(id: string) {
             name: visitor?.firstName + " " + visitor?.lastName ?? '',
             phone: visitor?.phoneNumber ?? '',
             email: visitor?.email ?? '',
-            photo: visitor?.image ?? ''
+            photo: visitor?.image ?? '',
+            date: visitor?.createdAt.toDateString() ?? ''
         }
     } catch (error) {
         throw new Error("Error fetching visitor data");

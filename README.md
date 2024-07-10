@@ -20,5 +20,9 @@ computer at the entrance of the building.
 - [x] Get visitor information from the database
 - [x] Generate a temporary ID Card for users
 - [x] Update the styling for the application
+    - [x] Make the avatar on the ID rounder
+    - [x] Move the name down
+    - [x] Add the date of the visit under the name
+    - [x] Make it dynamic for mobile users- view ID card.
 - [x] Add a feature to print a visitor badge 
 - [ ] Add a dashboard to view all visitors and visitor information

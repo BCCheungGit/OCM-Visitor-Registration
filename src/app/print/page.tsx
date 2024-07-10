@@ -18,11 +18,13 @@ const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainer
         phone: string | undefined;
         email?: string;
         photo: string | undefined;
+        date: string | undefined;
     }>({
         name: undefined,
         phone: undefined, 
         email: undefined,
-        photo: undefined
+        photo: undefined,
+        date: undefined,
     });
 
     useEffect(() => {
@@ -34,7 +36,8 @@ const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainer
                     name: visitor.name,
                     phone: visitor.phone,
                     email: visitor.email ?? undefined,
-                    photo: visitor.photo
+                    photo: visitor.photo,
+                    date: visitor.date
                 });
                 })
                 .catch((error) => console.error("Error fetching visitor:", error));
@@ -55,6 +58,7 @@ const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainer
                     phone={visitorData.phone}
                     email={visitorData.email}
                     photo={visitorData.photo}
+                    date={visitorData.date}
                 />
             )}
         </div>
@@ -73,10 +77,17 @@ export default function PrintPage() {
 
     return (
         <div className="flex h-full flex-col gap-4 min-h-screen items-center text-center text-lg mt-20">
+            <div className="sm:inline hidden">
             <ReactToPrint 
+                
                 trigger={() => <Button>Print ID Card</Button>}
                 content={() => idCardRef.current}
             />
+            </div>
+            <div className="sm:hidden flex flex-col">
+                <div>Registration Successfull!</div>
+                <div>登記成功！</div>
+            </div>
             <VisitorComponent id={user.id} idCardContainerRef={idCardRef} />
         </div>
     );
