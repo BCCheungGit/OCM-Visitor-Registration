@@ -25,4 +25,8 @@ computer at the entrance of the building.
     - [x] Add the date of the visit under the name
     - [x] Make it dynamic for mobile users- view ID card.
 - [x] Add a feature to print a visitor badge 
+
+
+
 - [ ] Add a dashboard to view all visitors and visitor information
+    - [ ] Protected routes for the dashboard https://clerk.com/docs/guides/basic-rbac#set-the-admin-role-for-your-user

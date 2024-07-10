@@ -97,7 +97,6 @@ export default function PrintPage() {
             </div>
             <div className="sm:hidden flex flex-col">
                 <div>ID Card:</div>
-                <div>ID卡:</div>
             </div>
             <VisitorComponent id={user.id} idCardContainerRef={idCardRef} />
         </div>
