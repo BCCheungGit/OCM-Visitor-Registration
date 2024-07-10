@@ -30,7 +30,7 @@ export const IDCard: React.FC<IDCardProps> = ({ name, phone, email, photo, date 
                         {name}
                         </div>
                         <div className="sm:text-base text-sm">
-                        Valid On: {date}
+                        {date}
                         </div>
                     </div>
                 

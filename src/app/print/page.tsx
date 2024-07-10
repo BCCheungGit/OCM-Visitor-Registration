@@ -12,6 +12,17 @@ interface VisitorComponentProps {
     idCardContainerRef: React.RefObject<HTMLDivElement>; 
 }
 
+
+const convertDateToString = (date: Date) => {
+    return date.toLocaleTimeString("en-US", {
+        day: "numeric",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+}
+
+
 const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainerRef }) => {
     const [visitorData, setVisitorData] = useState<{
         name: string | undefined;
@@ -37,7 +48,7 @@ const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainer
                     phone: visitor.phone,
                     email: visitor.email ?? undefined,
                     photo: visitor.photo,
-                    date: visitor.date
+                    date: convertDateToString(visitor.date),
                 });
                 })
                 .catch((error) => console.error("Error fetching visitor:", error));
@@ -85,8 +96,8 @@ export default function PrintPage() {
             />
             </div>
             <div className="sm:hidden flex flex-col">
-                <div>Registration Successfull!</div>
-                <div>登記成功！</div>
+                <div>ID Card:</div>
+                <div>ID卡:</div>
             </div>
             <VisitorComponent id={user.id} idCardContainerRef={idCardRef} />
         </div>
