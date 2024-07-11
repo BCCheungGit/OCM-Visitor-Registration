@@ -4,7 +4,6 @@ import { checkRole } from "~/utils/roles";
 import { clerkClient } from "@clerk/nextjs/server";
 import { SearchUsers } from "./_search-users";
 import { getVisitors, searchVisitors } from "~/server/queries";
-import { convertDateToString } from "../print/page";
 import {
   Table,
   TableBody,
