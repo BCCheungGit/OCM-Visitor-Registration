@@ -29,4 +29,4 @@ computer at the entrance of the building.
 
 
 - [ ] Add a dashboard to view all visitors and visitor information
-    - [ ] Protected routes for the dashboard https://clerk.com/docs/guides/basic-rbac#set-the-admin-role-for-your-user
+    - [x] Protected routes for the dashboard https://clerk.com/docs/guides/basic-rbac#set-the-admin-role-for-your-user
