@@ -60,8 +60,17 @@ export async function getVisitor(id: string) {
     } catch (error) {
         throw new Error("Error fetching visitor data");
     }
+}
 
-
-
-
+export async function searchVisitors(query: string | undefined) {
+    const user = auth();
+    if (!user) {
+        throw new Error("Unauthorized");
+    }
+    if (!query) {
+        return await db.query.visitors.findMany();
+    }
+    return await db.query.visitors.findMany({
+        where: (model, { ilike }) => ilike(model.firstName, query)
+    });
 }

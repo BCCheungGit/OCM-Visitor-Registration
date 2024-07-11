@@ -13,8 +13,9 @@ interface VisitorComponentProps {
 }
 
 
-const convertDateToString = (date: Date) => {
+export const convertDateToString = (date: Date) => {
     return date.toLocaleTimeString("en-US", {
+        year: "numeric",
         day: "numeric",
         month: "short",
         hour: "2-digit",
