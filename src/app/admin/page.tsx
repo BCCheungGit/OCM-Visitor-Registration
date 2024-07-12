@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import Image from "next/image";
 
 
 export default async function AdminDashboard(params: {
@@ -35,6 +36,7 @@ export default async function AdminDashboard(params: {
       <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="font-bold text-base">Image 圖片</TableHead>
                 <TableHead className="font-bold text-base">Full Name 姓名</TableHead>
                 <TableHead className="font-bold text-base">Phone Number 電話號碼</TableHead>
                 <TableHead className="font-bold text-base">Created At 創建時間</TableHead>
@@ -43,6 +45,7 @@ export default async function AdminDashboard(params: {
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
+                  <TableCell><img className="rounded-full w-[50px] h-[50px]" src={user.image} alt="User Image" /></TableCell>
                   <TableCell>{user.firstName} {user.lastName}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>

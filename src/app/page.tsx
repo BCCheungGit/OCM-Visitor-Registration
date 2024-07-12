@@ -29,17 +29,22 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
 
 const isMobile = window.innerWidth < 768;
 const width = isMobile ? window.innerWidth : 300;
-const height = isMobile ? 250 : 400;
+const height = isMobile ? window.innerWidth * 0.75 : 400;
 const videoConstraints = {
   width,
   height,
   facingMode: "user",
 };
+
+
+
 const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
 const webcamRef = useRef<Webcam>(null);
 const [url, setUrl] = useState<string | null>(null);
+
+
 const capture = useCallback(() => {
-  const imageSrc = webcamRef.current?.getScreenshot();
+  const imageSrc = webcamRef.current?.getScreenshot({width: width, height: height});
   if (imageSrc) {
     setUrl(imageSrc);
     console.log(imageSrc);

@@ -28,5 +28,10 @@ computer at the entrance of the building.
 
 
 
-- [ ] Add a dashboard to view all visitors and visitor information
+- [x] Add a dashboard to view all visitors and visitor information
+    - [x] View images of the visitors
+        - [ ] Add a modal to view the image in full screen when clicked
     - [x] Protected routes for the dashboard https://clerk.com/docs/guides/basic-rbac#set-the-admin-role-for-your-user
+    - [x] Search for visitors by first name
+
+- [ ] Deploy the application 
