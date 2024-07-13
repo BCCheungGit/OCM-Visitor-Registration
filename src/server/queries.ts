@@ -62,6 +62,8 @@ export async function getVisitor(id: string) {
     }
 }
 
+
+
 export async function searchVisitors(query: string | undefined) {
     const user = auth();
     if (!user) {

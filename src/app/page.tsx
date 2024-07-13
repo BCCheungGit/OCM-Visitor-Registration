@@ -46,7 +46,7 @@ const [url, setUrl] = useState<string | null>(null);
 
 
 const capture = useCallback(() => {
-  const imageSrc = webcamRef.current?.getScreenshot();
+  const imageSrc = webcamRef.current?.getScreenshot({width: width, height: height});
   if (imageSrc) {
     setUrl(imageSrc);
     console.log(imageSrc);

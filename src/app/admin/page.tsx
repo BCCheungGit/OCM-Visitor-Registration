@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import Image from "next/image";
+
 
 
 export default async function AdminDashboard(params: {
@@ -45,7 +45,7 @@ export default async function AdminDashboard(params: {
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell><img className="rounded-full w-[50px] h-[50px]" src={user.image} alt="User Image" /></TableCell>
+                  <TableCell><img className="rounded-md w-[80px] h-[106.4px]" src={user.image} alt="User Image" /></TableCell>
                   <TableCell>{user.firstName} {user.lastName}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>

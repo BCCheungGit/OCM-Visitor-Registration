@@ -21,8 +21,7 @@ export const IDCard: React.FC<IDCardProps> = ({ name, phone, email, photo, date 
                 </tr>
                 <tr className="grid grid-cols-3 min-w-full gap-2">
                     <td>
-                        <Image className="items-center rounded-lg sm:w-[160px] sm:h-[160px]" src={photo ?? "" } alt="Visitor Photo" width={100} height={80} />
-                        
+                        <Image className="items-center rounded-lg sm:w-[120.3px] sm:h-[150px]" src={photo ?? "" } alt="Visitor Photo" width={80} height={106.4} />
                     </td>
                     <td className="col-span-2">
                     <div className="flex flex-col gap-2">
