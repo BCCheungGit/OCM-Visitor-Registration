@@ -6,6 +6,7 @@ import { IDCard } from "../_components/idcard";
 import { useUser } from "@clerk/nextjs";
 import { getVisitor } from "~/server/queries";
 import ReactToPrint from 'react-to-print';
+import { redirect } from "next/navigation";
 
 interface VisitorComponentProps {
     id: string;
@@ -50,7 +51,10 @@ const VisitorComponent: React.FC<VisitorComponentProps> = ({ id, idCardContainer
                     email: visitor.email ?? undefined,
                     photo: visitor.photo,
                     date: convertDateToString(visitor.date),
-                });
+                }); 
+                if (visitorData.photo === "" || visitorData.photo === undefined) {
+                    redirect("/");
+                }
                 })
                 .catch((error) => console.error("Error fetching visitor:", error));
 
