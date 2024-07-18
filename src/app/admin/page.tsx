@@ -1,9 +1,10 @@
 
+
 import { redirect } from "next/navigation";
 import { checkRole } from "~/utils/roles";
 import { clerkClient } from "@clerk/nextjs/server";
 import { SearchUsers } from "./_search-users";
-import { getVisitors, searchVisitors } from "~/server/queries";
+import { deleteVisitor, getVisitors, searchVisitors } from "~/server/queries";
 import {
   Table,
   TableBody,
@@ -13,7 +14,19 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { Button } from "~/components/ui/button";
+import { useUser } from "@clerk/nextjs";
 
+
+
+
+async function handleDeleteUser(id: string) {
+  try { 
+    await deleteVisitor(id);
+  } catch (error) {
+    console.error("Error deleting user:", error); 
+  }
+}
 
 
 export default async function AdminDashboard(params: {
@@ -22,6 +35,8 @@ export default async function AdminDashboard(params: {
   if (!checkRole("admin")) {
     redirect("/");
   }
+
+
 
   const query = params.searchParams.search;
 
@@ -40,6 +55,7 @@ export default async function AdminDashboard(params: {
                 <TableHead className="font-bold text-base">Full Name 姓名</TableHead>
                 <TableHead className="font-bold text-base">Phone Number 電話號碼</TableHead>
                 <TableHead className="font-bold text-base">Created At 創建時間</TableHead>
+                <TableHead className="font-bold text-base">Admin Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -49,6 +65,7 @@ export default async function AdminDashboard(params: {
                   <TableCell>{user.firstName} {user.lastName}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>
+                  <TableCell><Button onClick={async () => {await handleDeleteUser(user.userId)}}>Delete User</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -1,9 +1,10 @@
 "use server"
 import { db } from "./db";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { visitors } from "./db/schema";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
+import { checkRole } from "~/utils/roles";
 
 
 
@@ -75,4 +76,24 @@ export async function searchVisitors(query: string | undefined) {
     return await db.query.visitors.findMany({
         where: (model, { ilike }) => ilike(model.firstName, query)
     });
+}
+
+
+export async function deleteVisitor(id: string) {
+    const user = auth();
+    if (!user || !checkRole("admin")) {
+        throw new Error("Unauthorized");
+    }
+
+
+    try {
+        await db.delete(visitors).where(eq(visitors.userId, id));
+        await clerkClient.users.deleteUser(id);
+        
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error deleting visitor");
+    }
+
+
 }
