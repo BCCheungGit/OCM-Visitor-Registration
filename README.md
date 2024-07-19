@@ -33,7 +33,7 @@ computer at the entrance of the building.
         - [ ] Add a modal to view the image in full screen when clicked
     - [x] Protected routes for the dashboard https://clerk.com/docs/guides/basic-rbac#set-the-admin-role-for-your-user
     - [x] Search for visitors by first name
-    - [ ] Delete button for admins
+    - [x] Delete button for admins
 
 - [ ] Add QR code to the id card (use user_id)
 - [ ] Set up Deletion scripts to delete all records older than 7 days from db
