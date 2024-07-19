@@ -1,5 +1,4 @@
 
-
 import { redirect } from "next/navigation";
 import { checkRole } from "~/utils/roles";
 import { clerkClient } from "@clerk/nextjs/server";
@@ -16,17 +15,10 @@ import {
 } from "~/components/ui/table";
 import { Button } from "~/components/ui/button";
 import { useUser } from "@clerk/nextjs";
+import { currentUser } from '@clerk/nextjs/server';
+import { revalidatePath } from "next/cache";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "~/components/ui/alert-dialog";
 
-
-
-
-async function handleDeleteUser(id: string) {
-  try { 
-    await deleteVisitor(id);
-  } catch (error) {
-    console.error("Error deleting user:", error); 
-  }
-}
 
 
 export default async function AdminDashboard(params: {
@@ -34,13 +26,16 @@ export default async function AdminDashboard(params: {
 }) {
   if (!checkRole("admin")) {
     redirect("/");
+    return null;
   }
 
 
-
+  
   const query = params.searchParams.search;
 
   const users = await searchVisitors(query);
+
+  const current = await currentUser();
 
   // const users = query ? (await clerkClient.users.getUserList({ query })).data : [];
 
@@ -65,7 +60,43 @@ export default async function AdminDashboard(params: {
                   <TableCell>{user.firstName} {user.lastName}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>
-                  <TableCell><Button onClick={async () => {await handleDeleteUser(user.userId)}}>Delete User</Button></TableCell>
+
+                  <TableCell>
+                  {current?.id !== user.userId ? (
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="destructive">Delete</Button>
+                        </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you sure you want to delete this user: ({user.firstName} {user.lastName})?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>
+                            Cancel
+                          </AlertDialogCancel>
+                          <AlertDialogAction asChild>
+                          <form action={async () => {
+                        "use server";
+                        await deleteVisitor(user.userId);
+                        revalidatePath("/admin");
+                      }}> 
+                        <Button type="submit" >Delete</Button>
+                      </form>
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                      </AlertDialog>
+                  )
+                  :
+                  (
+                    <><p className="font-semibold opacity-40">Cannot Delete Self</p></>
+                  )
+                  }
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

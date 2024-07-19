@@ -190,7 +190,7 @@ function GetInfoPage() {
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col min-h-screen items-center mt-20">
+    <main className="flex flex-col min-h-screen items-center">
       <SignedOut>
         <div className="h-full text-lg justify-center items-center text-center flex flex-col gap-4">
           <div>

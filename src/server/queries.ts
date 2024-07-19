@@ -85,7 +85,6 @@ export async function deleteVisitor(id: string) {
         throw new Error("Unauthorized");
     }
 
-
     try {
         await db.delete(visitors).where(eq(visitors.userId, id));
         await clerkClient.users.deleteUser(id);
@@ -94,6 +93,4 @@ export async function deleteVisitor(id: string) {
         console.log(error);
         throw new Error("Error deleting visitor");
     }
-
-
 }

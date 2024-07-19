@@ -92,7 +92,7 @@ export default function PrintPage() {
     }
 
     return (
-        <div className="flex h-full flex-col gap-4 min-h-screen items-center text-center text-lg mt-20">
+        <div className="flex h-full flex-col gap-4 min-h-screen items-center text-center text-lg ">
             <div className="sm:inline hidden">
             <ReactToPrint 
                 
