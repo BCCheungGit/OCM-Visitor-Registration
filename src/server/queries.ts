@@ -5,6 +5,7 @@ import { visitors } from "./db/schema";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { checkRole } from "~/utils/roles";
+import { revalidatePath } from "next/cache";
 
 
 
@@ -30,7 +31,7 @@ export async function addVisitor(
         userId: userId,
     })
 
-    redirect("/print");
+    revalidatePath("/");
 }
 
 export async function getVisitors() {

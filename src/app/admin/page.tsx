@@ -84,7 +84,7 @@ export default async function AdminDashboard(params: {
                         await deleteVisitor(user.userId);
                         revalidatePath("/admin");
                       }}> 
-                        <Button type="submit" >Delete</Button>
+                        <button type="submit" >Delete</button>
                       </form>
                           </AlertDialogAction>
                         </AlertDialogFooter>

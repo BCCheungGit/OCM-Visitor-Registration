@@ -40,3 +40,7 @@ computer at the entrance of the building.
 
 
 - [ ] Deploy the application 
+
+## Bug Fixes:
+- [ ] Fix the issue with the camera not working on mobile devices
+- [ ] Fix the issue with images getting stretched on mobile admin dashboard

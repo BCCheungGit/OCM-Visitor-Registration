@@ -85,6 +85,11 @@ useEffect(() => {
   fetchVisitor();
   }, [id]);
 
+  if (user.publicMetadata?.role === "admin") {
+    redirect("/admin");
+  }
+  
+
   if (!visitorData.photo) return (
     <div className="flex h-full flex-col gap-4 text-center text-lg">
       
