@@ -11,6 +11,93 @@ import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
 import { addVisitor, getVisitor } from "~/server/queries";
 import PrintPage from "./print/page";
+import { Camera, CameraType } from "react-camera-pro";
+
+// const VisitorComponentMobile: React.FC<{ id: string }> = ({ id }) => {
+//   const [visitorData, setVisitorData] = useState<{
+//     name: string | undefined;
+//     phone: string | undefined;
+//     email?: string;
+//     photo: string | undefined;
+//   }>({
+//     name: undefined,
+//     phone: undefined,
+//     email: undefined,
+//     photo: undefined,
+//   });
+
+//   const [numberOfCameras, setNumberOfCameras] = useState(0);
+//   const [image, setImage] = useState<string | undefined>(undefined);
+//   const camera = useRef<CameraType>(null);
+
+//   const errors = {
+//     noCameraAccessible: 'No camera device accessible. Please connect your camera or try a different browser.',
+//     permissionDenied: 'Permission denied. Please refresh and give camera permission.',
+//     switchCamera:
+//     'It is not possible to switch camera to different one because there is only one video device accessible.',
+//     canvas: 'Canvas is not supported.'
+//   }
+
+//   const { user } = useUser();
+//   if (!user) return null;
+
+//   useEffect(() => {
+//     async function fetchVisitor() {
+//         try {
+//             await getVisitor(id)
+//             .then((visitor) => {
+//               setVisitorData({
+//                 name: visitor.name,
+//                 phone: visitor.phone,
+//                 email: visitor.email ?? undefined,
+//                 photo: visitor.photo ?? undefined
+//               });
+//             })
+//             .catch((error) => console.error("Error fetching visitor:", error));
+//         } catch (error) {
+//             console.error("Error fetching visitor:", error);
+//         }
+//     }
+  
+//     fetchVisitor();
+//     }, [id]);
+
+//     if (user.publicMetadata?.role === "admin") {
+//       redirect("/admin");
+//     }
+
+//   return (
+//     <div className="flex h-full flex-col gap-4 text-center text-lg">
+      
+//     <div>
+//       Welcome, <span>{user.fullName}</span>
+//     </div>
+//     {user.emailAddresses[0]?.emailAddress && (
+//       <div>
+//         Email: <span>{user.emailAddresses[0]?.emailAddress}</span>
+//       </div>
+//     )}
+//     {user.phoneNumbers[0]?.phoneNumber && (
+//       <div>
+//         Phone: <span>{user.phoneNumbers[0]?.phoneNumber}</span>
+//       </div>
+//     )}
+
+//     <Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} errorMessages={errors} facingMode="user" />
+//     <img src={image} />
+//     <Button
+//         onClick={() => {
+//           if (camera.current) {
+//             const photo = camera.current.takePhoto();
+//             setImage(photo);
+//           }
+//         }}
+//       />
+//     </div>
+//   )
+    
+// }
+
 
 
 const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
@@ -26,9 +113,7 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
     photo: undefined
 });
 
-    
-
-// const isMobile = rdd.isMobile;
+  
 const width = 300;
 const height = 400;
 
@@ -47,7 +132,7 @@ const [url, setUrl] = useState<string | null>(null);
 
 
 const capture = useCallback(() => {
-  const imageSrc = webcamRef.current?.getScreenshot();
+  const imageSrc = webcamRef.current?.getScreenshot({width: width, height: height});
   if (imageSrc) {
     setUrl(imageSrc);
     console.log(imageSrc);
