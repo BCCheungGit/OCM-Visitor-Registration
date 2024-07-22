@@ -5,6 +5,7 @@ import { SignedIn, SignedOut, SignUpButton, useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { Router } from "next/router";
 
+import * as rdd from 'react-device-detect';
 import { useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
@@ -27,7 +28,7 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
 
     
 
-const isMobile = window.innerWidth < 768;
+const isMobile = rdd.isMobile;
 const width = isMobile ? window.innerWidth : 300;
 const height = isMobile ? window.innerWidth * 1.33 : 400;
 
@@ -46,7 +47,7 @@ const [url, setUrl] = useState<string | null>(null);
 
 
 const capture = useCallback(() => {
-  const imageSrc = webcamRef.current?.getScreenshot({width: width, height: height});
+  const imageSrc = webcamRef.current?.getScreenshot();
   if (imageSrc) {
     setUrl(imageSrc);
     console.log(imageSrc);
