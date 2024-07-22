@@ -119,8 +119,8 @@ const height = 400;
 
 
 const videoConstraints = {
-  width,
-  height,
+  width: 300,
+  height: 400,
   facingMode: "user",
 };
 
