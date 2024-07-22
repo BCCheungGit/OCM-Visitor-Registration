@@ -26,14 +26,14 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
     photo: undefined
 });
 
-  
-const width = 300;
-const height = 400;
+const isMobile = rdd.isMobile;
+const width = isMobile ? 400 : 300;
+const height = isMobile ? 300: 400;
 
 
 const videoConstraints = {
-  width: 300,
-  height: 400,
+  width: width,
+  height: height,
   facingMode: "user",
 };
 
@@ -122,7 +122,7 @@ useEffect(() => {
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            videoConstraints={{width: 300, height: 400, facingMode: 'user'}}
+            videoConstraints={videoConstraints}
             mirrored={true}
           />
           <div className="flex flex-row justify-center gap-4">
