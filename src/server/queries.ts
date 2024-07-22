@@ -31,7 +31,7 @@ export async function addVisitor(
         userId: userId,
     })
 
-    revalidatePath("/");
+    redirect("/print");
 }
 
 export async function getVisitors() {

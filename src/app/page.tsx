@@ -28,9 +28,9 @@ const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
 
     
 
-const isMobile = rdd.isMobile;
-const width = isMobile ? window.innerWidth : 300;
-const height = isMobile ? window.innerWidth * 1.33 : 400;
+// const isMobile = rdd.isMobile;
+const width = 300;
+const height = 400;
 
 
 const videoConstraints = {
