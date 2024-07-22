@@ -30,7 +30,7 @@ computer at the entrance of the building.
 
 - [x] Add a dashboard to view all visitors and visitor information
     - [x] View images of the visitors
-        - [ ] Add a modal to view the image in full screen when clicked
+        - [x] Add a modal to view the image in full screen when clicked
     - [x] Protected routes for the dashboard https://clerk.com/docs/guides/basic-rbac#set-the-admin-role-for-your-user
     - [x] Search for visitors by first name
     - [x] Delete button for admins
@@ -43,4 +43,4 @@ computer at the entrance of the building.
 
 ## Bug Fixes:
 - [ ] Fix the issue with the camera not working on mobile devices
-- [ ] Fix the issue with images getting stretched on mobile admin dashboard
+- [x] Fix the issue with images getting stretched on mobile admin dashboard

@@ -56,7 +56,22 @@ export default async function AdminDashboard(params: {
             <TableBody>
               {users.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell><img className="rounded-md w-[80px] h-[106.4px]" src={user.image} alt="User Image" /></TableCell>
+                  <TableCell>
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                    <img className="rounded-md w-[80px] h-[106.4px]" src={user.image} alt="User Image" />
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader className="flex flex-row items-center justify-center">
+                        <AlertDialogTitle>User Image</AlertDialogTitle>
+                      </AlertDialogHeader>
+                      <AlertDialogDescription className="flex flex-row items-center justify-center">
+                        <img className="rounded-md w-[300px] h-[400px]" src={user.image} alt="User Image" />
+                      </AlertDialogDescription>
+                    <AlertDialogCancel>Close</AlertDialogCancel>
+                    </AlertDialogContent>
+                    </AlertDialog>
+                  </TableCell>
                   <TableCell>{user.firstName} {user.lastName}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>
