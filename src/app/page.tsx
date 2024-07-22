@@ -11,87 +11,6 @@ import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
 import { addVisitor, getVisitor } from "~/server/queries";
 import PrintPage from "./print/page";
-import { Camera, CameraType } from "react-camera-pro";
-
-const VisitorComponentMobile: React.FC<{ id: string }> = ({ id }) => {
-  const [visitorData, setVisitorData] = useState<{
-    name: string | undefined;
-    phone: string | undefined;
-    email?: string;
-    photo: string | undefined;
-  }>({
-    name: undefined,
-    phone: undefined,
-    email: undefined,
-    photo: undefined,
-  });
-
-
-
-  const [image, setImage] = useState<string | undefined>(undefined);
-  const { user } = useUser();
-  if (!user) return null;
-
-  const handleCapture = (target: any) => {
-    if (target.files) {
-      if (target.files.length !== 0 ) {
-        const file = target.files[0];
-        const newURL = URL.createObjectURL(file);
-        setImage(newURL);
-      }   
-     }
-  }
-
-  useEffect(() => {
-    async function fetchVisitor() {
-        try {
-            await getVisitor(id)
-            .then((visitor) => {
-              setVisitorData({
-                name: visitor.name,
-                phone: visitor.phone,
-                email: visitor.email ?? undefined,
-                photo: visitor.photo ?? undefined
-              });
-            })
-            .catch((error) => console.error("Error fetching visitor:", error));
-        } catch (error) {
-            console.error("Error fetching visitor:", error);
-        }
-    }
-  
-    fetchVisitor();
-    }, [id]);
-
-    if (user.publicMetadata?.role === "admin") {
-      redirect("/admin");
-    }
-
-  return (
-    <div className="flex h-full flex-col gap-4 text-center text-lg">
-      
-    <div>
-      Welcome, <span>{user.fullName}</span>
-    </div>
-    {user.emailAddresses[0]?.emailAddress && (
-      <div>
-        Email: <span>{user.emailAddresses[0]?.emailAddress}</span>
-      </div>
-    )}
-    {user.phoneNumbers[0]?.phoneNumber && (
-      <div>
-        Phone: <span>{user.phoneNumbers[0]?.phoneNumber}</span>
-      </div>
-    )}
-
-    <img src={image} />
-    <input accept="image/*" capture="user" onChange={(e) => handleCapture(e.target) } />
-    
-    </div>
-  )
-    
-}
-
 
 
 const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
@@ -203,7 +122,7 @@ useEffect(() => {
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
+            videoConstraints={{width: 300, height: 400, facingMode: 'user'}}
             mirrored={true}
           />
           <div className="flex flex-row justify-center gap-4">
@@ -264,20 +183,11 @@ useEffect(() => {
 function GetInfoPage() {
   const { user } = useUser();
   if (!user) return null;
-  const isMobile = rdd.isMobile;
-  if (isMobile) {
-    return (
-      <>
-      <VisitorComponentMobile id={user.id} />
-      </>
-    )
-  } else {
   return (
     <>
     <VisitorComponent id={user.id} />
     </>
   );
-}
 }
 
 
