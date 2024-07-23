@@ -15,7 +15,7 @@ the admin dashboard.
 
 ## Running the program
 - Clone the repository to a local machine
-- Run
+- Install dependencies
 ```
 npm install
 ```

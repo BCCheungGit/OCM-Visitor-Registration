@@ -1,7 +1,7 @@
 "use client";
 
 
-import { SignedIn, SignedOut, SignUpButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignUpButton, useClerk, useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { Router } from "next/router";
 
@@ -43,21 +43,22 @@ const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false);
 const webcamRef = useRef<Webcam>(null);
 const [url, setUrl] = useState<string | null>(null);
 
+const clerkClient = useClerk();
+
+
+const { user } = useUser();
+if (!user) return null;
 
 const capture = useCallback(() => {
   const imageSrc = webcamRef.current?.getScreenshot({width: isMobile ? height : width, height: isMobile ? width : height});
   if (imageSrc) {
     setUrl(imageSrc);
     console.log(imageSrc);
+
     setCaptureEnable(false);
     console.log(imageSrc);
   }
 }, [webcamRef, setUrl])
-
-
-
-const { user } = useUser();
-if (!user) return null;
 
 
 
@@ -160,9 +161,10 @@ useEffect(() => {
                   url,
                   user.id
                 )
+                clerkClient.user?.setProfileImage({file: url});
                 setUrl(null);
                 alert("Uploaded successfully!");
-                
+
             }}>
               Confirm Upload
             </Button>
