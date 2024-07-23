@@ -3,7 +3,7 @@ import { db } from "./db";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { visitors } from "./db/schema";
 import { redirect } from "next/navigation";
-import { eq } from "drizzle-orm";
+import { eq, ne } from "drizzle-orm";
 import { checkRole } from "~/utils/roles";
 import { revalidatePath } from "next/cache";
 
@@ -93,5 +93,34 @@ export async function deleteVisitor(id: string) {
     } catch (error) {
         console.log(error);
         throw new Error("Error deleting visitor");
+    }
+}
+
+
+export async function deleteOldVisitors() {
+    const user = auth();
+    if (!user || !checkRole("admin")) {
+        throw new Error("Unauthorized");    
+    }
+    try {
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 1); // Calculate the date one week ago
+
+        const oldVisitors = await db.query.visitors.findMany({
+            where: (model, { lt }) => lt(model.createdAt, oneWeekAgo),
+        });
+
+
+        for (const visitor of oldVisitors) {
+            if ((await clerkClient.users.getUser(visitor.userId)).publicMetadata.role === "admin") {
+                continue;
+            }
+            await db.delete(visitors).where(eq(visitors.userId, visitor.userId));
+            await clerkClient.users.deleteUser(visitor.userId);
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error("Error deleting all visitors");
+        
     }
 }

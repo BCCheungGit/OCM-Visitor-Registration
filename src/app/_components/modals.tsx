@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "~/components/ui/alert-dialog";
 import { Button } from "~/components/ui/button";
-import { deleteVisitor } from "~/server/queries";
+import { deleteOldVisitors, deleteVisitor } from "~/server/queries";
 
 
 interface DeleteModalProps {
@@ -13,6 +13,7 @@ interface DeleteModalProps {
 interface ImageModalProps {
     image: string;
 }
+
 
 
 export const ImageModal: React.FC<ImageModalProps> = ({image}) => {
@@ -69,5 +70,36 @@ return (
 );
 };
 
-
+export const DeleteAllModal: React.FC = () => {
+    return (
+        <AlertDialog>
+            <AlertDialogTrigger asChild>
+                <Button variant="destructive">Run Deletion Script</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure you want to delete all visitors from last week?</AlertDialogTitle>
+                </AlertDialogHeader>
+                <AlertDialogDescription>
+                    This action cannot be undone. All visitors who visited in the last 7 days will be deleted.
+                </AlertDialogDescription>
+                <AlertDialogFooter>
+                    <AlertDialogCancel>
+                        Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction asChild>
+                        <form action={async () => {
+                            "use server";
+                            await deleteOldVisitors();
+                            revalidatePath("/admin");
+                        }}>
+                            <button type="submit">Delete</button>
+                        </form>
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+      
+    )
+}
 

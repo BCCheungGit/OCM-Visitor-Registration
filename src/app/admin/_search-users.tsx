@@ -4,7 +4,6 @@
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-
 export const SearchUsers = () => {
     const router = useRouter();
     const pathname = usePathname();
@@ -26,6 +25,7 @@ export const SearchUsers = () => {
                 
                 <Input type="text" name="search" id="search" />
                 <Button type="submit">Search</Button>
+
             </form>
         </div>
     );

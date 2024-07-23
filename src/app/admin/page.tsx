@@ -18,7 +18,7 @@ import { useUser } from "@clerk/nextjs";
 import { currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from "next/cache";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "~/components/ui/alert-dialog";
-import { DeleteModal, ImageModal } from "../_components/modals";
+import { DeleteAllModal, DeleteModal, ImageModal } from "../_components/modals";
 
 
 
@@ -45,6 +45,7 @@ export default async function AdminDashboard(params: {
   return (  
     <div className="flex flex-col items-center justify-center min-w-screen min-h-full mt-20">
       <SearchUsers />
+      <DeleteAllModal />
       <Table>
             <TableHeader>
               <TableRow>
