@@ -200,7 +200,7 @@ export default function HomePage() {
           <div>
             Welcome to OCM! Click the button below to register.
           </div>
-        <SignUpButton><Button className="w-fit">Register</Button></SignUpButton>
+        <SignUpButton><Button className="w-fit">Register or Sign In</Button></SignUpButton>
         </div>
       </SignedOut>
       <SignedIn>
