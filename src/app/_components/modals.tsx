@@ -38,6 +38,7 @@ export const ImageModal: React.FC<ImageModalProps> = ({image}) => {
 
 export const DeleteModal: React.FC<DeleteModalProps> = ({firstName, lastName, userId}) => {
 return (
+
     <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant="destructive">Delete</Button>

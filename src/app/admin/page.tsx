@@ -18,7 +18,7 @@ import { useUser } from "@clerk/nextjs";
 import { currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from "next/cache";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "~/components/ui/alert-dialog";
-import { AdminModal, DeleteModal, ImageModal } from "../_components/modals";
+import { DeleteModal, ImageModal } from "../_components/modals";
 
 
 
@@ -65,7 +65,7 @@ export default async function AdminDashboard(params: {
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>
 
-                  <TableCell className="flex flex-row gap-4">
+                  <TableCell>
                   {current?.id !== user.userId ? (
                     <>
                     <DeleteModal firstName={user.firstName} lastName={user.lastName} userId={user.userId} />
