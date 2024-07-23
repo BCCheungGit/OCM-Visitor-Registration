@@ -104,7 +104,7 @@ export async function deleteOldVisitors() {
     }
     try {
         const oneWeekAgo = new Date();
-        oneWeekAgo.setDate(oneWeekAgo.getDate() - 1); // Calculate the date one week ago
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); // Calculate the date one week ago
 
         const oldVisitors = await db.query.visitors.findMany({
             where: (model, { lt }) => lt(model.createdAt, oneWeekAgo),
