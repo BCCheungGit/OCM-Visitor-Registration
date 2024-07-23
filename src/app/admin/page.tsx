@@ -18,6 +18,8 @@ import { useUser } from "@clerk/nextjs";
 import { currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from "next/cache";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "~/components/ui/alert-dialog";
+import { AdminModal, DeleteModal, ImageModal } from "../_components/modals";
+
 
 
 
@@ -57,54 +59,17 @@ export default async function AdminDashboard(params: {
               {users.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell>
-                  <AlertDialog>
-                    <AlertDialogTrigger>
-                    <img className="rounded-md w-[80px] h-[106.4px]" src={user.image} alt="User Image" />
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader className="flex flex-row items-center justify-center">
-                        <AlertDialogTitle>User Image</AlertDialogTitle>
-                      </AlertDialogHeader>
-                      <AlertDialogDescription className="flex flex-row items-center justify-center">
-                        <img className="rounded-md w-[300px] h-[400px]" src={user.image} alt="User Image" />
-                      </AlertDialogDescription>
-                    <AlertDialogCancel>Close</AlertDialogCancel>
-                    </AlertDialogContent>
-                    </AlertDialog>
+                  <ImageModal image={user.image} />
                   </TableCell>
                   <TableCell>{user.firstName} {user.lastName}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
                   <TableCell>{user.createdAt.toLocaleDateString() + " " + user.createdAt.toLocaleTimeString()}</TableCell>
 
-                  <TableCell>
+                  <TableCell className="flex flex-row gap-4">
                   {current?.id !== user.userId ? (
-                    <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button variant="destructive">Delete</Button>
-                        </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Are you sure you want to delete this user: ({user.firstName} {user.lastName})?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>
-                            Cancel
-                          </AlertDialogCancel>
-                          <AlertDialogAction asChild>
-                          <form action={async () => {
-                        "use server";
-                        await deleteVisitor(user.userId);
-                        revalidatePath("/admin");
-                      }}> 
-                        <button type="submit" >Delete</button>
-                      </form>
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                      </AlertDialog>
+                    <>
+                    <DeleteModal firstName={user.firstName} lastName={user.lastName} userId={user.userId} />
+                    </>
                   )
                   :
                   (
