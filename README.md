@@ -13,6 +13,22 @@ the admin dashboard.
 - Data Retention: 1 Month (Temporary)
 
 
+## Running the program
+- Clone the repository to a local machine
+- Run
+```
+npm install
+```
+- Run the program in development mode with 
+```
+npm run dev
+```
+
+- To view the db, run
+```
+npm run db:studio
+```
+
 ## TODO:
 In no particular order, the things that need to be implemented before use:
 
