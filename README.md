@@ -60,7 +60,7 @@ In no particular order, the things that need to be implemented before use:
 - [ ] Add QR code to the id card (use user_id)
 
 - [ ] Visual UI/UX improvements
-- [ ] Chinese Support for the rest of the application
+- [ ] Chinese Support for the rest of the application [here](https://clerk.com/docs/components/customization/localization#languages)
 
 
 ### Bug Fixes:
