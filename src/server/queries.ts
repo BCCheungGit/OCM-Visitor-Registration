@@ -22,6 +22,7 @@ export async function addVisitor(
     if (!user) {
         throw new Error("Unauthorized");
     }
+    
     await db.insert(visitors).values({
         firstName: firstName,
         lastName: lastName,
@@ -96,31 +97,31 @@ export async function deleteVisitor(id: string) {
     }
 }
 
+// ! Depreciated!
+// export async function deleteOldVisitors() {
+//     const user = auth();
+//     if (!user || !checkRole("admin")) {
+//         throw new Error("Unauthorized");    
+//     }
+//     try {
+//         const oneWeekAgo = new Date();
+//         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); 
 
-export async function deleteOldVisitors() {
-    const user = auth();
-    if (!user || !checkRole("admin")) {
-        throw new Error("Unauthorized");    
-    }
-    try {
-        const oneWeekAgo = new Date();
-        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); // Calculate the date one week ago
-
-        const oldVisitors = await db.query.visitors.findMany({
-            where: (model, { lt }) => lt(model.createdAt, oneWeekAgo),
-        });
+//         const oldVisitors = await db.query.visitors.findMany({
+//             where: (model, { lt }) => lt(model.createdAt, oneWeekAgo),
+//         });
 
 
-        for (const visitor of oldVisitors) {
-            if ((await clerkClient.users.getUser(visitor.userId)).publicMetadata.role === "admin") {
-                continue;
-            }
-            await db.delete(visitors).where(eq(visitors.userId, visitor.userId));
-            await clerkClient.users.deleteUser(visitor.userId);
-        }
-    } catch (error) {
-        console.log(error);
-        throw new Error("Error deleting all visitors");
+//         for (const visitor of oldVisitors) {
+//             if ((await clerkClient.users.getUser(visitor.userId)).publicMetadata.role === "admin") {
+//                 continue;
+//             }
+//             await db.delete(visitors).where(eq(visitors.userId, visitor.userId));
+//             await clerkClient.users.deleteUser(visitor.userId);
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         throw new Error("Error deleting all visitors");
         
-    }
-}
+//     }
+// }
