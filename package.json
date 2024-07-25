@@ -14,6 +14,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@clerk/localizations": "^2.5.1",
     "@clerk/nextjs": "^5.1.6",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.0",
