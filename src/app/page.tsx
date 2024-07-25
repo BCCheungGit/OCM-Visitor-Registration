@@ -204,10 +204,10 @@ export default function HomePage() {
           <div>
             Welcome to OCM! Click the button below to register.
           </div>
-          <Link href="/sign-up">
+          <SignUpButton>
             <Button className="w-fit">Register or Sign In</Button>
-            </Link>
-        </div>
+            </SignUpButton>
+           </div>
       </SignedOut>
       <SignedIn>
         <GetInfoPage />

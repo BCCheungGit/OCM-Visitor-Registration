@@ -6,7 +6,7 @@ import { Button } from "~/components/ui/button";
 
 export function TopNav() {
     return (
-        <nav className="flex w-full items-center justify-between p-4 sm:text-xl text-base font-semibold border-b mb-20">
+        <nav className="flex w-full items-center justify-between p-4 sm:text-xl text-base font-semibold border-b mb-10">
             <div className="flex flex-row items-center justify-center">
             <Image src='https://avatars.planningcenteronline.com/uploads/organization/217202-1482195203/avatar.1.png' alt="Main Church" className="sm:w-[120px] sm:h-[120px]" width={80} height={80} />
             </div>
