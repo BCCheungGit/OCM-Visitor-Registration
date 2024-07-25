@@ -175,9 +175,7 @@ useEffect(() => {
     </div>
   );
   else {
-    return (
-      <PrintPage/>
-    )
+    redirect("/print");
   }
   
 };
@@ -205,7 +203,7 @@ export default function HomePage() {
             Welcome to OCM! Click the button below to register.
           </div>
           <SignUpButton>
-            <Button className="w-fit">Register or Sign In</Button>
+            <Button className="w-fit">Register or Sign In 登记/登入</Button>
             </SignUpButton>
            </div>
       </SignedOut>
