@@ -3,7 +3,7 @@
 
 import { SignedIn, SignedOut, SignUpButton, useClerk, useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
 
 import * as rdd from 'react-device-detect';
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -11,6 +11,7 @@ import Webcam from "react-webcam";
 import { Button } from "~/components/ui/button";
 import { addVisitor, getVisitor } from "~/server/queries";
 import PrintPage from "./print/page";
+import Link from "next/link";
 
 
 const VisitorComponent: React.FC<{ id: string }> = ({ id }) => {
@@ -195,6 +196,7 @@ function GetInfoPage() {
 
 
 export default function HomePage() {
+
   return (
     <main className="flex flex-col min-h-screen items-center">
       <SignedOut>
@@ -202,7 +204,9 @@ export default function HomePage() {
           <div>
             Welcome to OCM! Click the button below to register.
           </div>
-        <SignUpButton><Button className="w-fit">Register or Sign In</Button></SignUpButton>
+          <Link href="/sign-up">
+            <Button className="w-fit">Register or Sign In</Button>
+            </Link>
         </div>
       </SignedOut>
       <SignedIn>

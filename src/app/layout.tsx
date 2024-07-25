@@ -11,22 +11,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-const localization = {
-  signUp: {
-    continue: {
-      actionLink: 'blah',
-      actionText: 'blablah',
-      subtitle: 'Please fill in the remaining details to continue.',
-      title: 'Fill in missing fields',
-    },
-    start: {
-      actionLink: 'blah blah',
-      actionText: 'Benjamin Cheung',
-      subtitle: 'Welcome! Please fill in the details to get started.',
-      title: 'Create your account',
-    },
-  }
-}
+
 
 export default function RootLayout({
   children,
