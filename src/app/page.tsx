@@ -86,9 +86,14 @@ useEffect(() => {
   fetchVisitor();
   }, [id]);
 
-  if (user.publicMetadata?.role === "admin") {
-    redirect("/admin");
-  }
+  
+  useEffect(() => {
+    if (user.publicMetadata?.role === "admin") {
+      redirect("/admin");
+    }
+  }, [user.publicMetadata?.role]);
+
+
   
 
   if (!visitorData.photo) return (
@@ -198,9 +203,9 @@ export default function HomePage() {
   return (
     <main className="flex flex-col min-h-screen items-center">
       <SignedOut>
-        <div className="h-full text-lg justify-center items-center text-center flex flex-col gap-4">
+        <div className="h-full text-lg justify-center bg-white items-center sm:mt-20 mt-10 text-center flex flex-col gap-4 p-4 border-2 border-slate-100 rounded-lg shadow-xl">
           <div>
-            Welcome to OCM! Click the button below to register.
+            Welcome to OCM! 中宣会欢迎您！
           </div>
           <SignUpButton>
             <Button className="w-fit">Register or Sign In 登记/登入</Button>
