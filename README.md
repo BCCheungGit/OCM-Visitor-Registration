@@ -62,16 +62,8 @@ In no particular order, the things that need to be implemented before use:
 ### Extra features
 - [x] Set up Deletion scripts to delete all records older than 7 days from db
     - Deletion scripts are now running in a separate Node.js repository [here](https://github.com/BCCheungGit/OCM-Visitor-Scripts)
-- [ ] Chinese Support for the rest of the application [here](https://clerk.com/docs/components/customization/localization#languages)
-
-- [ ] Add QR code to the id card (use user_id)
-
-- [ ] Visual UI/UX improvements
-
+- [x] Chinese Support for the rest of the application [here](https://clerk.com/docs/components/customization/localization#languages)
 
 ### Bug Fixes:
-- [ ] Fix the issue with the camera being blocked on certain mobile browsers
 - [x] Fix the issue with images getting stretched on mobile admin dashboard
 
-### Deploy !
-- [ ] Deploy the application 
