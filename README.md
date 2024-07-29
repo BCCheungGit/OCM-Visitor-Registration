@@ -1,5 +1,10 @@
 # OCM Visitors Application
 
+## Important Links
+This is a demo version of the final application, the repo of which can be found [here](https://github.com/BCCheungGit/OCM-Visitors-Supabase)
+
+The final application replaces Clerk with Supabase for authentication and storage with Twilio for SMS verification, in order to reduce costs.
+
 ## Description
 This is a web application that allows visitors to check in to the OCM church building without having to fill out a paper form. The application is designed to be used on a tablet or computer at the entrance of the building. The application can be run on mobile devices for viewing ID cards or
 the admin dashboard.
